@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leonel Rugama - Proyecto Escolar</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    color:white;
+    background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("fondo.png"); /* FONDO GENERAL LOCAL */
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    overflow-x:hidden;
+}
+
+/* Partículas */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+}
+
+/* Contenido encima */
+header, section, footer{
+    position:relative;
+    z-index:2;
+}
+
+/* ENCABEZADO CON FONDO LOCAL PROPIO */
+header{
+    text-align:center;
+    padding:120px 20px;
+    background:
+    linear-gradient(rgba(139,0,0,0.45), rgba(139,0,0,0.45)),
+    url("encabezado.jpg"); /* IMAGEN LOCAL DEL ENCABEZADO */
+    background-size:cover;
+    background-position:center;
+}
+
+header h1{
+    font-size:60px;
+    color:#ff4444;
+}
+
+header p{
+    font-size:22px;
+}
+
+section{
+    padding:60px 20px;
+    max-width:1000px;
+    margin:auto;
+}
+
+h2{
+    border-bottom:2px solid #ff4444;
+    margin-bottom:20px;
+    padding-bottom:10px;
+    color:#ff4444;
+}
+
+/* Línea de tiempo */
+.timeline-item{
+    background:rgba(255,255,255,0.08);
+    margin:20px 0;
+    padding:20px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.timeline-item:hover{
+    background:rgba(139,0,0,0.6);
+    transform:scale(1.03);
+}
+
+.timeline-content{
+    display:none;
+    margin-top:10px;
+}
+
+/* Galería */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.gallery img{
+    width:100%;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.gallery img:hover{
+    transform:scale(1.05);
+}
+
+/* Modal */
+.modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.modal img{
+    max-width:80%;
+    max-height:80%;
+}
+
+/* Conclusión */
+.conclusion-box{
+    background:rgba(255,255,255,0.08);
+    padding:30px;
+    border-radius:15px;
+}
+
+.frase-final{
+    margin-top:20px;
+    font-size:26px;
+    color:#ff4444;
+    text-align:center;
+}
+
+/* Botones */
+button{
+    padding:10px 20px;
+    background:#8B0000;
+    border:none;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+    margin-top:20px;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ff4444;
+    transform:scale(1.05);
+}
+
+/* Pantalla Final */
+#pantallaFinal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:black;
+    color:white;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    z-index:10000;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:black;
+    margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<header>
+<h1>Leonel Rugama</h1>
+<p>Poeta y Revolucionario Nicaragüense</p>
+</header>
+
+<section>
+<h2>Línea de Tiempo</h2>
+
+<div class="timeline-item" onclick="toggleContent(this)">
+<h3>1949 - Nacimiento</h3>
+<div class="timeline-content">
+Nació el 27 de marzo de 1949 en Estelí, Nicaragua.
+Desde joven mostró interés por la literatura y la realidad social.
+</div>
+</div>
+
+<div class="timeline-item" onclick="toggleContent(this)">
+<h3>1967 - Compromiso Social</h3>
+<div class="timeline-content">
+Se integró al movimiento revolucionario influenciado por la situación política del país.
+Participó activamente en la lucha social y en la defensa de sus ideales.
+</div>
+</div>
+
+<div class="timeline-item" onclick="toggleContent(this)">
+<h3>1969 - Obra Destacada</h3>
+<div class="timeline-content">
+Escribió “La Tierra es un Satélite de la Luna”, una obra de crítica social que reflejaba la realidad del país.
+</div>
+</div>
+
+<div class="timeline-item" onclick="toggleContent(this)">
+<h3>1970 - Fallecimiento</h3>
+<div class="timeline-content">
+Murió el 15 de enero de 1970 a los 20 años durante un enfrentamiento en Managua.
+Su frase “Que se rinda tu madre” quedó como símbolo de firmeza y valentía.
+</div>
+</div>
+
+</section>
+
+<section>
+<h2>Galería</h2>
+<div class="gallery">
+<img src="rugama.jpg" onclick="openModal(this.src)">
+<img src="bandera.jpg" onclick="openModal(this.src)">
+<img src="esteli.jpg" onclick="openModal(this.src)">
+</div>
+</section>
+
+<section>
+<h2>Conclusión</h2>
+<div class="conclusion-box">
+<p>
+Leonel Rugama representa la unión entre juventud, pensamiento crítico y compromiso social.
+A pesar de su corta vida, dejó una huella profunda en la historia y literatura de Nicaragua.
+</p>
+
+<p>
+Su poesía no solo fue arte, fue conciencia. No solo escribió palabras, escribió historia.
+</p>
+
+<div class="frase-final">“Que se rinda tu madre.”</div>
+
+<p>
+Más que una frase, fue una declaración de firmeza, valentía y convicción. 
+Hoy, su legado continúa inspirando a nuevas generaciones.
+</p>
+
+<button onclick="mostrarFinal()">Finalizar Presentación</button>
+</div>
+</section>
+
+<div id="pantallaFinal">
+<div>
+<h1>Leonel Rugama</h1>
+<h2>1949 – 1970</h2>
+<p>Proyecto Escolar<br>Jeffry Mayorga</p>
+<button onclick="volverInicio()">Volver al Inicio</button>
+</div>
+</div>
+
+<footer>
+Proyecto Escolar - Jeffry Mayorga
+</footer>
+
+<script>
+function toggleContent(element){
+const content = element.querySelector(".timeline-content");
+content.style.display =
+content.style.display === "block" ? "none" : "block";
+}
+
+function openModal(src){
+let modal=document.createElement("div");
+modal.className="modal";
+modal.innerHTML=`<img src="${src}">`;
+modal.onclick=function(){modal.remove();}
+document.body.appendChild(modal);
+}
+
+function mostrarFinal(){
+document.getElementById("pantallaFinal").style.display="flex";
+}
+
+function volverInicio(){
+document.getElementById("pantallaFinal").style.display="none";
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* Partículas */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particlesArray=[];
+
+class Particle{
+constructor(){
+this.x=Math.random()*canvas.width;
+this.y=Math.random()*canvas.height;
+this.size=Math.random()*2+1;
+this.speedX=Math.random()*1-0.5;
+this.speedY=Math.random()*1-0.5;
+}
+update(){
+this.x+=this.speedX;
+this.y+=this.speedY;
+}
+draw(){
+ctx.fillStyle="rgba(255,0,0,0.5)";
+ctx.beginPath();
+ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+ctx.fill();
+}
+}
+
+function init(){
+for(let i=0;i<100;i++){
+particlesArray.push(new Particle());
+}
+}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+for(let i=0;i<particlesArray.length;i++){
+particlesArray[i].update();
+particlesArray[i].draw();
+}
+requestAnimationFrame(animate);
+}
+
+init();
+animate();
+
+window.addEventListener("resize",()=>{
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+});
+</script>
+
+</body>
+</html>

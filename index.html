@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 
 <title>Leonel Rugama | Página Cultural</title>
 
@@ -22,7 +22,7 @@ linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
 url("fondo.png");
 background-size:cover;
 background-position:center;
-background-attachment:fixed;
+background-attachment:fixed; /* Por defecto fixed, pero en móvil lo cambiamos */
 color:white;
 overflow-x:hidden;
 }
@@ -46,6 +46,9 @@ background:rgba(0,0,0,0.85);
 padding:15px;
 text-align:center;
 z-index:1000;
+overflow-x:auto;
+white-space:nowrap;
+-webkit-overflow-scrolling:touch;
 }
 
 nav a{
@@ -56,6 +59,7 @@ font-weight:bold;
 padding:8px 15px;
 border-radius:8px;
 transition:0.3s;
+display:inline-block;
 }
 
 nav a:hover{
@@ -143,11 +147,20 @@ bottom:20px;
 right:20px;
 background:#ff0000;
 border:none;
-padding:15px;
+padding:15px 20px;
 color:white;
-border-radius:10px;
+border-radius:50px;
 cursor:pointer;
 z-index:1000;
+font-size:16px;
+box-shadow:0 4px 8px rgba(0,0,0,0.3);
+transition:background 0.3s;
+-webkit-tap-highlight-color: transparent;
+}
+
+.boton-musica:active{
+background:#cc0000;
+transform:scale(0.95);
 }
 
 .frase-final{
@@ -157,7 +170,7 @@ z-index:1000;
     text-align:center;
 }
 
-/* FOOTER MODIFICADO CON LOGO */
+/* FOOTER CON LOGO */
 footer{
 text-align:center;
 padding:20px;
@@ -186,7 +199,6 @@ footer img {
     margin-top: 20px;
 }
 
-/* Contenedor del botón de inicio */
 .quiz-start-container {
     text-align: center;
     padding: 40px 20px;
@@ -204,11 +216,7 @@ footer img {
     box-shadow: 0 8px 0 #2e7d32;
     transition: transform 0.2s, filter 0.2s;
     margin-bottom: 20px;
-}
-
-.quiz-start-btn:hover {
-    transform: translateY(-3px);
-    filter: brightness(1.1);
+    -webkit-tap-highlight-color: transparent;
 }
 
 .quiz-start-btn:active {
@@ -224,7 +232,6 @@ footer img {
     border-radius: 10px;
 }
 
-/* Cabecera del juego */
 .quiz-header {
     display: flex;
     justify-content: space-between;
@@ -293,11 +300,7 @@ footer img {
     text-align: center;
     transition: transform 0.2s, filter 0.2s;
     width: 100%;
-}
-
-.quiz-opcion:hover {
-    transform: translateY(-3px);
-    filter: brightness(1.1);
+    -webkit-tap-highlight-color: transparent;
 }
 
 .quiz-opcion:active {
@@ -336,10 +339,6 @@ footer img {
     transition: background 0.2s;
 }
 
-.quiz-reiniciar:hover {
-    background: #4d637f;
-}
-
 .quiz-reiniciar:active {
     transform: translateY(4px);
     box-shadow: 0 1px 0 #1d2a38;
@@ -367,13 +366,82 @@ footer img {
     display: none;
 }
 
-@media (max-width: 600px) {
-    .quiz-pregunta { font-size: 1.3rem; }
-    .quiz-opcion { font-size: 1.1rem; padding: 20px 5px; }
-    .quiz-header { font-size: 1rem; }
-    .quiz-resultado { font-size: 1.5rem; }
-    .quiz-rango { font-size: 1.8rem; }
-    .quiz-start-btn { font-size: 1.4rem; padding: 15px 30px; }
+/* MEDIA QUERIES PARA MÓVILES */
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll; /* Mejor rendimiento en móvil */
+    }
+
+    nav {
+        padding: 10px 0;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    nav a {
+        margin: 0 5px;
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    header h1 {
+        font-size: 30px;
+        padding: 15px;
+    }
+
+    section {
+        padding: 60px 15px;
+    }
+
+    .quiz-pregunta {
+        font-size: 1.4rem;
+    }
+
+    .quiz-opcion {
+        font-size: 1.1rem;
+        padding: 20px 5px;
+    }
+
+    .quiz-header {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .quiz-start-btn {
+        font-size: 1.4rem;
+        padding: 15px 30px;
+    }
+
+    .boton-musica {
+        bottom: 15px;
+        right: 15px;
+        padding: 12px 18px;
+        font-size: 14px;
+    }
+
+    /* Reducir partículas en móvil para mejorar rendimiento */
+    #canvasParticulas {
+        display: none; /* Opcional: desactivar partículas en móvil */
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    .frase-final {
+        font-size: 20px;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    footer img {
+        height: 30px;
+    }
 }
 </style>
 
@@ -562,10 +630,10 @@ Hoy, su legado continúa inspirando a nuevas generaciones.
 
 </section>
 
-<!-- FOOTER MODIFICADO CON LOGO -->
+<!-- FOOTER CON LOGO -->
 <footer>
     <span>2026 Proyecto Identidad Nacional y Orgullo Patrio | Grupo 1S2-SIS-S | Grupo Nacatamales</span>
-    <img src="logouni.png" alt="Logo Nacatamales">
+    <img src="logo.png" alt="Logo Nacatamales">
 </footer>
 
 <audio id="musicaFondo" loop>
@@ -594,24 +662,37 @@ musica.pause();
 btn.innerText="Activar Música";
 reproduciendo=false;
 }else{
-musica.play().catch(()=>{});
+// En móviles, la reproducción debe iniciarse por gesto del usuario
+musica.play().then(()=>{
 btn.innerText="Pausar Música";
 reproduciendo=true;
+}).catch(error=>{
+console.log("Error al reproducir música:", error);
+alert("No se pudo reproducir la música. Asegúrate de que el archivo existe.");
+});
 }
 }
 
+// Canvas de partículas: reducimos número en móvil
 const canvas=document.getElementById("canvasParticulas");
 const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
 let particulas=[];
-for(let i=0;i<100;i++){
+const numParticulas = window.innerWidth < 768 ? 30 : 100; // Menos partículas en móvil
+
+for(let i=0;i<numParticulas;i++){
 particulas.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
-vx:(Math.random()-0.5),
-vy:(Math.random()-0.5),
+vx:(Math.random()-0.5) * 0.5, // Velocidad más lenta
+vy:(Math.random()-0.5) * 0.5,
 size:Math.random()*3+1
 });
 }

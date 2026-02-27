@@ -3,248 +3,297 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leonel Rugama - Proyecto</title>
+
+<title>Leonel Rugama | Página Cultural</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+
+/* SCROLL SUAVE */
+html{
+scroll-behavior:smooth;
+scroll-padding-top:90px;
 }
 
+/* FONDO GENERAL */
 body{
-    font-family: Arial, sans-serif;
-    color:white;
-    background:
-    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-    url("fondo.png"); /* FONDO GENERAL LOCAL */
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
-    overflow-x:hidden;
+margin:0;
+font-family:Arial, sans-serif;
+background:
+linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+url("fondo.png");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+color:white;
+overflow-x:hidden;
 }
 
-/* Partículas */
-canvas{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    z-index:0;
-    pointer-events:none;
+/* CANVAS PARTICULAS */
+#canvasParticulas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
 }
 
-/* Contenido encima */
-header, section, footer{
-    position:relative;
-    z-index:2;
+/* MENU */
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(0,0,0,0.85);
+padding:15px;
+text-align:center;
+z-index:1000;
 }
 
-/* ENCABEZADO CON FONDO LOCAL PROPIO */
+nav a{
+color:white;
+margin:15px;
+text-decoration:none;
+font-weight:bold;
+padding:8px 15px;
+border-radius:8px;
+transition:0.3s;
+}
+
+nav a:hover{
+background:#ff0000;
+}
+
+nav a.activo{
+background:#ff0000;
+}
+
+/* HEADER */
 header{
-    text-align:center;
-    padding:120px 20px;
-    background:
-    linear-gradient(rgba(139,0,0,0.45), rgba(139,0,0,0.45)),
-    url("encabezado.jpg"); /* IMAGEN LOCAL DEL ENCABEZADO */
-    background-size:cover;
-    background-position:center;
+height:100vh;
+background:
+linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+url("encabezado.jpg");
+background-size:cover;
+background-position:center;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
 }
 
 header h1{
-    font-size:60px;
-    color:#ff4444;
+font-size:50px;
+background:rgba(0,0,0,0.6);
+padding:20px;
+border-radius:10px;
 }
 
-header p{
-    font-size:22px;
-}
-
+/* SECCIONES */
 section{
-    padding:60px 20px;
-    max-width:1000px;
-    margin:auto;
+padding:80px 20px;
+max-width:1000px;
+margin:auto;
+background:rgba(0,0,0,0.55);
+margin-top:20px;
+border-radius:10px;
 }
 
-h2{
-    border-bottom:2px solid #ff4444;
-    margin-bottom:20px;
-    padding-bottom:10px;
-    color:#ff4444;
+/* GALERIA */
+.galeria{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
 }
 
-/* Línea de tiempo */
+.galeria img, video{
+width:100%;
+border-radius:10px;
+}
+
+/* TIMELINE */
 .timeline-item{
-    background:rgba(255,255,255,0.08);
-    margin:20px 0;
-    padding:20px;
-    border-radius:10px;
-    cursor:pointer;
-    transition:0.3s;
+background:rgba(255,255,255,0.08);
+padding:15px;
+margin:10px;
+border-radius:10px;
+cursor:pointer;
+transition:0.3s;
 }
 
 .timeline-item:hover{
-    background:rgba(139,0,0,0.6);
-    transform:scale(1.03);
+background:rgba(255,0,0,0.25);
 }
 
-.timeline-content{
-    display:none;
-    margin-top:10px;
+.timeline-info{
+display:none;
+margin-top:10px;
+line-height:1.6;
 }
 
-/* Galería */
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
+/* POEMA */
+.poema{
+font-style:italic;
+text-align:center;
+line-height:1.7;
 }
 
-.gallery img{
-    width:100%;
-    border-radius:10px;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.gallery img:hover{
-    transform:scale(1.05);
-}
-
-/* Modal */
-.modal{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.9);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-}
-
-.modal img{
-    max-width:80%;
-    max-height:80%;
-}
-
-/* Conclusión */
-.conclusion-box{
-    background:rgba(255,255,255,0.08);
-    padding:30px;
-    border-radius:15px;
-}
-
-.frase-final{
-    margin-top:20px;
-    font-size:26px;
-    color:#ff4444;
-    text-align:center;
-}
-
-/* Botones */
-button{
-    padding:10px 20px;
-    background:#8B0000;
-    border:none;
-    color:white;
-    border-radius:5px;
-    cursor:pointer;
-    margin-top:20px;
-    transition:0.3s;
-}
-
-button:hover{
-    background:#ff4444;
-    transform:scale(1.05);
-}
-
-/* Pantalla Final */
-#pantallaFinal{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:black;
-    color:white;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    z-index:10000;
+/* BOTON MUSICA */
+.boton-musica{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#ff0000;
+border:none;
+padding:15px;
+color:white;
+border-radius:10px;
+cursor:pointer;
+z-index:1000;
 }
 
 footer{
-    text-align:center;
-    padding:20px;
-    background:black;
-    margin-top:40px;
+text-align:center;
+padding:20px;
 }
+
 </style>
+
 </head>
 
 <body>
 
-<canvas id="particles"></canvas>
+<canvas id="canvasParticulas"></canvas>
 
-<header>
-<h1>Leonel Rugama</h1>
-<p>Poeta y Revolucionario Nicaragüense</p>
+<nav>
+
+<a href="#inicio" class="nav-link activo">Inicio</a>
+<a href="#timeline" class="nav-link">Línea de Tiempo</a>
+<a href="#galeria" class="nav-link">Galería</a>
+<a href="#poema" class="nav-link">Poema</a>
+<a href="#conclusion" class="nav-link">Conclusión</a>
+<a href="#kahoot" class="nav-link">Actividad</a>
+
+</nav>
+
+<header id="inicio">
+<h1>
+Leonel Rugama<br>
+Poeta y Revolucionario Nicaragüense
+</h1>
 </header>
 
-<section>
+<section id="timeline">
+
 <h2>Línea de Tiempo</h2>
 
-<div class="timeline-item" onclick="toggleContent(this)">
-<h3>1949 - Nacimiento</h3>
-<div class="timeline-content">
-Nació el 27 de marzo de 1949 en Estelí, Nicaragua.
-Desde joven mostró interés por la literatura y la realidad social.
+<div class="timeline-item" onclick="toggleInfo(this)">
+<strong>1949 — Nacimiento</strong>
+<div class="timeline-info">
+
+Leonel Rugama nació el 27 de marzo de 1949 en Estelí, Nicaragua. Desde temprana edad demostró una gran inteligencia y sensibilidad social.
+
+Creció en un entorno marcado por desigualdades sociales, lo que influyó profundamente en su pensamiento crítico.
+
+Su infancia estuvo acompañada de una formación educativa sólida que le permitió desarrollar capacidades analíticas y reflexivas.
+
 </div>
 </div>
 
-<div class="timeline-item" onclick="toggleContent(this)">
-<h3>1967 - Compromiso Social</h3>
-<div class="timeline-content">
-Se integró al movimiento revolucionario influenciado por la situación política del país.
-Participó activamente en la lucha social y en la defensa de sus ideales.
+<div class="timeline-item" onclick="toggleInfo(this)">
+<strong>1965 — Formación Académica</strong>
+<div class="timeline-info">
+
+Ingresó a la Universidad Nacional Autónoma de Nicaragua (UNAN-León), donde estudió matemáticas.
+
+Se destacó como un estudiante brillante, con gran capacidad lógica, pensamiento crítico y análisis estructurado.
+
+Su formación académica fortaleció su visión del mundo y su compromiso social.
+
 </div>
 </div>
 
-<div class="timeline-item" onclick="toggleContent(this)">
-<h3>1969 - Obra Destacada</h3>
-<div class="timeline-content">
-Escribió “La Tierra es un Satélite de la Luna”, una obra de crítica social que reflejaba la realidad del país.
+<div class="timeline-item" onclick="toggleInfo(this)">
+<strong>1967 — Desarrollo Literario</strong>
+<div class="timeline-info">
+
+Comenzó a escribir poesía como medio de expresión intelectual y social.
+
+Su obra reflejaba la realidad del pueblo nicaragüense, la injusticia social y la desigualdad.
+
+Su poema más representativo fue “La Tierra es un Satélite de la Luna”.
+
 </div>
 </div>
 
-<div class="timeline-item" onclick="toggleContent(this)">
-<h3>1970 - Fallecimiento</h3>
-<div class="timeline-content">
-Murió el 15 de enero de 1970 a los 20 años durante un enfrentamiento en Managua.
-Su frase “Que se rinda tu madre” quedó como símbolo de firmeza y valentía.
+<div class="timeline-item" onclick="toggleInfo(this)">
+<strong>1969 — Compromiso Revolucionario</strong>
+<div class="timeline-info">
+
+Se integró al Frente Sandinista de Liberación Nacional, motivado por su convicción de transformar la sociedad.
+
+Representó el compromiso de la juventud con la justicia social.
+
+</div>
+</div>
+
+<div class="timeline-item" onclick="toggleInfo(this)">
+<strong>1970 — Fallecimiento</strong>
+<div class="timeline-info">
+
+Murió el 15 de enero de 1970 en Managua, a los 20 años.
+
+Pronunció su histórica frase:
+
+"Que se rinda tu madre"
+
+Su legado continúa vigente como símbolo de valentía y compromiso social.
+
 </div>
 </div>
 
 </section>
 
-<section>
-<h2>Galería</h2>
-<div class="gallery">
-<img src="rugama.jpg" onclick="openModal(this.src)">
-<img src="bandera.jpg" onclick="openModal(this.src)">
-<img src="esteli.jpg" onclick="openModal(this.src)">
+<section id="galeria">
+
+<h2>Galería Multimedia</h2>
+
+<div class="galeria">
+
+<img src="rugama.jpg">
+<img src="bandera.jpg">
+<img src="esteli.jpg">
+
+<video controls>
+<source src="LEONEL VIDEO.mp4">
+</video>
+
 </div>
+
 </section>
 
-<section>
+<section id="poema">
+
+<h2>Poema</h2>
+
+<div class="poema">
+
+El Apolo 2 costó más que el Apolo 1<br>
+el Apolo 1 costó bastante.<br><br>
+ 
+El Apolo 3 costó más que el Apolo 2<br>
+el Apolo 2 costó más que el Apolo 1<br>
+el Apolo 1 costó bastante.<br><br>
+
+(Fragmento representativo de su obra)
+
+</div>
+
+</section>
+
+<section id="conclusion">
+
 <h2>Conclusión</h2>
-<div class="conclusion-box">
-<p>
+
 Leonel Rugama representa la unión entre juventud, pensamiento crítico y compromiso social.
 A pesar de su corta vida, dejó una huella profunda en la historia y literatura de Nicaragua.
 </p>
@@ -260,100 +309,160 @@ Más que una frase, fue una declaración de firmeza, valentía y convicción.
 Hoy, su legado continúa inspirando a nuevas generaciones.
 </p>
 
-<button onclick="mostrarFinal()">Finalizar Presentación</button>
-</div>
+
 </section>
 
-<div id="pantallaFinal">
-<div>
-<h1>Leonel Rugama</h1>
-<h2>1949 – 1970</h2>
-<p>Proyecto<br>Nacatamales</p>
-<button onclick="volverInicio()">Volver al Inicio</button>
-</div>
-</div>
+<section id="kahoot">
+
+<h2>Actividad</h2>
+
+<p>
+
+COLOCAR AQUÍ TU LINK O QR
+
+Ejemplo:
+
+https://kahoot.it/
+
+</p>
+
+</section>
 
 <footer>
-Identidad Nacional y Orgullo Patrio
+
+Proyecto Cultural Leonel Rugama
+
 </footer>
 
+<audio id="musicaFondo" loop>
+<source src="musica.mp4">
+</audio>
+
+<button onclick="toggleMusica()" class="boton-musica" id="btnMusica">
+Activar Música
+</button>
+
 <script>
-function toggleContent(element){
-const content = element.querySelector(".timeline-content");
-content.style.display =
-content.style.display === "block" ? "none" : "block";
+
+/* TIMELINE */
+
+function toggleInfo(element){
+
+let info=element.querySelector(".timeline-info");
+
+info.style.display=
+info.style.display==="block"?"none":"block";
+
 }
 
-function openModal(src){
-let modal=document.createElement("div");
-modal.className="modal";
-modal.innerHTML=`<img src="${src}">`;
-modal.onclick=function(){modal.remove();}
-document.body.appendChild(modal);
+/* MUSICA */
+
+let musica=document.getElementById("musicaFondo");
+let btn=document.getElementById("btnMusica");
+let reproduciendo=false;
+
+function toggleMusica(){
+
+if(reproduciendo){
+
+musica.pause();
+btn.innerText="Activar Música";
+reproduciendo=false;
+
+}else{
+
+musica.play().catch(()=>{});
+btn.innerText="Pausar Música";
+reproduciendo=true;
+
 }
 
-function mostrarFinal(){
-document.getElementById("pantallaFinal").style.display="flex";
 }
 
-function volverInicio(){
-document.getElementById("pantallaFinal").style.display="none";
-window.scrollTo({top:0,behavior:"smooth"});
-}
+/* PARTICULAS ROJAS SUELTAS */
 
-/* Partículas */
-const canvas=document.getElementById("particles");
+const canvas=document.getElementById("canvasParticulas");
 const ctx=canvas.getContext("2d");
 
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
-let particlesArray=[];
+let particulas=[];
 
-class Particle{
-constructor(){
-this.x=Math.random()*canvas.width;
-this.y=Math.random()*canvas.height;
-this.size=Math.random()*2+1;
-this.speedX=Math.random()*1-0.5;
-this.speedY=Math.random()*1-0.5;
-}
-update(){
-this.x+=this.speedX;
-this.y+=this.speedY;
-}
-draw(){
-ctx.fillStyle="rgba(255,0,0,0.5)";
-ctx.beginPath();
-ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-ctx.fill();
-}
-}
-
-function init(){
 for(let i=0;i<100;i++){
-particlesArray.push(new Particle());
-}
-}
 
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-for(let i=0;i<particlesArray.length;i++){
-particlesArray[i].update();
-particlesArray[i].draw();
-}
-requestAnimationFrame(animate);
-}
+particulas.push({
 
-init();
-animate();
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+vx:(Math.random()-0.5),
+vy:(Math.random()-0.5),
+size:Math.random()*3+1
 
-window.addEventListener("resize",()=>{
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
 });
+
+}
+
+function animar(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="red";
+
+particulas.forEach(p=>{
+
+p.x+=p.vx;
+p.y+=p.vy;
+
+if(p.x<0||p.x>canvas.width)p.vx*=-1;
+if(p.y<0||p.y>canvas.height)p.vy*=-1;
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+ctx.fill();
+
+});
+
+requestAnimationFrame(animar);
+
+}
+
+animar();
+
+/* MENU ACTIVO */
+
+const sections=document.querySelectorAll("section, header");
+const navLinks=document.querySelectorAll(".nav-link");
+
+window.addEventListener("scroll",()=>{
+
+let current="";
+
+sections.forEach(section=>{
+
+if(pageYOffset>=section.offsetTop-120){
+
+current=section.id;
+
+}
+
+});
+
+navLinks.forEach(link=>{
+
+link.classList.remove("activo");
+
+if(link.getAttribute("href")==="#"+current){
+
+link.classList.add("activo");
+
+}
+
+});
+
+});
+
 </script>
 
 </body>
-
 </html>

@@ -157,12 +157,28 @@ z-index:1000;
     text-align:center;
 }
 
+/* FOOTER MODIFICADO CON LOGO */
 footer{
 text-align:center;
 padding:20px;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 10px;
+flex-wrap: wrap;
 }
 
-/* ===== ESTILOS DEL JUEGO KAHOOT (CON BOTÓN DE INICIO) ===== */
+footer span {
+    display: inline-block;
+}
+
+footer img {
+    height: 40px;
+    width: auto;
+    vertical-align: middle;
+}
+
+/* ===== ESTILOS DEL JUEGO KAHOOT ===== */
 .quiz-contenedor {
     background: rgba(255,255,255,0.1);
     border-radius: 20px;
@@ -546,10 +562,10 @@ Hoy, su legado continúa inspirando a nuevas generaciones.
 
 </section>
 
+<!-- FOOTER MODIFICADO CON LOGO -->
 <footer>
-
-2026 Proyecto Identidad Nacional y Orgullo Patrio | Grupo 1S2-SIS-S | Grupo Nacatamales
-
+    <span>2026 Proyecto Identidad Nacional y Orgullo Patrio | Grupo 1S2-SIS-S | Grupo Nacatamales</span>
+    <img src="logouni.png" alt="Logo Nacatamales">
 </footer>
 
 <audio id="musicaFondo" loop>
@@ -805,7 +821,6 @@ link.classList.add("activo");
         puedeResponder = true;
         detenerTimer();
 
-        // Asegurar que los elementos del juego estén visibles
         headerEl.classList.remove('hidden');
         questionEl.classList.remove('hidden');
         optionsEl.classList.remove('hidden');
@@ -816,21 +831,18 @@ link.classList.add("activo");
         cargarPregunta();
     }
 
-    // Evento del botón de inicio
     startBtn.addEventListener('click', () => {
-        startContainer.classList.add('hidden');   // Ocultar el contenedor de inicio
-        headerEl.classList.remove('hidden');      // Mostrar header del juego
-        questionEl.classList.remove('hidden');    // Mostrar pregunta
-        optionsEl.classList.remove('hidden');     // Mostrar opciones
-        reiniciarJuego();                         // Comenzar el juego
+        startContainer.classList.add('hidden');
+        headerEl.classList.remove('hidden');
+        questionEl.classList.remove('hidden');
+        optionsEl.classList.remove('hidden');
+        reiniciarJuego();
     });
 
-    // Evento del botón de reiniciar
     restartBtn.addEventListener('click', () => {
         reiniciarJuego();
     });
 
-    // No llamamos a reiniciarJuego() automáticamente, el juego espera el clic en Iniciar.
 })();
 </script>
 
